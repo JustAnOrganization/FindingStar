@@ -4,6 +4,7 @@
 
 #include "Table.h"
 #include "Utils.h"
+#include "ModelImporter.h"
 
 void Table::initialize()
 {
@@ -12,13 +13,20 @@ void Table::initialize()
     shaderProgram = Utils::InitShader("./shaders/blinnPhong.vert", "./shaders/blinnPhong.frag");
 
     //todo: load model
+    std::vector<glm::vec3> verts;
+    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> normals;
+    ModelImporter::loadObj("models/desk.obj", verts, uvs, normals);
+
     vector<VertexPositionUvNormal> vertices;
-    //for ()
+    for (int i = 0; i < verts.size(); ++i)
     {
-        vertices.push_back(VertexPositionUvNormal(vec3(0, 0, 0), vec2(0, 0), vec3(0, 1, 0)));
-        vertices.push_back(VertexPositionUvNormal(vec3(0, 1, 1), vec2(1, 1), vec3(0, 1, 0)));
-        vertices.push_back(VertexPositionUvNormal(vec3(1, 0, 0), vec2(0.5, 0.5), vec3(0, 1, 0)));
+        vertices.push_back(VertexPositionUvNormal(verts[i], uvs[i], normals[i]));
     }
+    cout << "table size:" << verts.size() << endl;
+//    vertices.push_back(VertexPositionUvNormal(vec3(0, 0, 0), vec2(0, 0), vec3(0, 1, 0)));
+//    vertices.push_back(VertexPositionUvNormal(vec3(0, 1, 1), vec2(1, 1), vec3(0, 1, 0)));
+//    vertices.push_back(VertexPositionUvNormal(vec3(1, 0, 0), vec2(0.5, 0.5), vec3(0, 1, 0)));
 
     // Create the vertex and index buffers
     glGenBuffers(1, &vbo);
