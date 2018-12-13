@@ -12,7 +12,8 @@ void TextRenderer::init()
     SDL_Color color = { 255, 0, 0 };
     SDL_Surface *face = NULL;
 
-    for (GLubyte c = 14; c < 128; c++)
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    for (GLubyte c = 1; c < 128; c++)
     {
         string tmp(1, (char)c);
 
@@ -59,11 +60,6 @@ void TextRenderer::init()
         Characters.insert(std::pair<GLchar, Character>(char(c), character));
     }
 
-    // Set OpenGL options
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     shaderProgram = Utils::InitShader("./shaders/font.vert", "./shaders/font.frag");
     glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(800), 0.0f, static_cast<GLfloat>(600));
     glUseProgram(shaderProgram);
@@ -87,6 +83,10 @@ void TextRenderer::renderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     glUniform3f(glGetUniformLocation(shaderProgram, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(vao);
+
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++)

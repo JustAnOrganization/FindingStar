@@ -20,13 +20,12 @@ float lastTime = 0;
 
 bool fullscreen = false;
 
-float rand01(){
-	return rand()/(float)RAND_MAX;
-}
+//float rand01(){
+//	return rand()/(float)RAND_MAX;
+//}
 
 int main(int argc, char *argv[]){
-	SDL_Init(SDL_INIT_VIDEO);  //Initialize Graphics (for OpenGL)
-
+	SDL_Init(SDL_INIT_VIDEO);
 	//Ask SDL to get a recent version of OpenGL (3.2 or greater)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
