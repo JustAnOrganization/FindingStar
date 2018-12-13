@@ -4,6 +4,7 @@
 
 #include "Model.h"
 #include "Utils.h"
+#include "ModelImporter.h"
 
 void Model::initialize()
 {
@@ -11,12 +12,30 @@ void Model::initialize()
 
     shaderProgram = Utils::InitShader("./shaders/blinnPhong.vert", "./shaders/blinnPhong.frag");
 
+<<<<<<< HEAD:final/Model.cpp
     std::vector<glm::vec3> verts;
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals;
     ModelImporter::loadObj(modelPath.c_str(), verts, uvs, normals);
 
     cout << "model vertex size:" << verts.size() << endl;
+=======
+    //todo: load model
+    std::vector<glm::vec3> verts;
+    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> normals;
+    ModelImporter::loadObj("models/desk.obj", verts, uvs, normals);
+
+    vector<VertexPositionUvNormal> vertices;
+    for (int i = 0; i < verts.size(); ++i)
+    {
+        vertices.push_back(VertexPositionUvNormal(verts[i], uvs[i], normals[i]));
+    }
+    cout << "table size:" << verts.size() << endl;
+//    vertices.push_back(VertexPositionUvNormal(vec3(0, 0, 0), vec2(0, 0), vec3(0, 1, 0)));
+//    vertices.push_back(VertexPositionUvNormal(vec3(0, 1, 1), vec2(1, 1), vec3(0, 1, 0)));
+//    vertices.push_back(VertexPositionUvNormal(vec3(1, 0, 0), vec2(0.5, 0.5), vec3(0, 1, 0)));
+>>>>>>> parent of b6d26a5... Revert "Merge branch 'master' of https://github.com/JustAnOrganization/FindingStar":final/Table.cpp
 
     // Create the vertex and index buffers
     glGenBuffers(1, &vbo);
