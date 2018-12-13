@@ -16,7 +16,11 @@ void Model::initialize()
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals;
     ModelImporter::loadObj(modelPath.c_str(), verts, uvs, normals);
-
+    vector<VertexPositionUvNormal> vertices;
+    for (int i = 0; i < verts.size(); ++i)
+    {
+        vertices.push_back(VertexPositionUvNormal(verts[i], uvs[i], normals[i]));
+    }
     cout << "model vertex size:" << verts.size() << endl;
 
     // Create the vertex and index buffers
