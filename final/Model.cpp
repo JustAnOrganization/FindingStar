@@ -4,7 +4,6 @@
 
 #include "Model.h"
 #include "Utils.h"
-#include "ModelImporter.h"
 
 void Model::initialize()
 {
@@ -12,17 +11,11 @@ void Model::initialize()
 
     shaderProgram = Utils::InitShader("./shaders/blinnPhong.vert", "./shaders/blinnPhong.frag");
 
-    //todo: load model
     std::vector<glm::vec3> verts;
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals;
     ModelImporter::loadObj(modelPath.c_str(), verts, uvs, normals);
 
-    vector<VertexPositionUvNormal> vertices;
-    for (int i = 0; i < verts.size(); ++i)
-    {
-        vertices.push_back(VertexPositionUvNormal(verts[i], uvs[i], normals[i]));
-    }
     cout << "model vertex size:" << verts.size() << endl;
 
     // Create the vertex and index buffers
