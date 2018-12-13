@@ -33,10 +33,12 @@ public:
     vec3 normal;
 };
 
-class Table: public RenderObject
+class Model: public RenderObject
 {
 public:
-    Table(Game& game, vec3 location, vec3 rotation, vec3 scale): RenderObject(game, location, rotation, scale) { }
+    Model(Game& game, vec3 location, vec3 rotation, vec3 scale, std::string modelPath="models/desk.obj"
+            , std::string texPath="textures/wood.bmp")//"models/Wall_Paper.jpg"
+    : RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath) { }
 
     virtual void initialize() override;
     virtual void update(float deltaTime) override;
@@ -47,6 +49,8 @@ private:
     GLuint vao, vbo;
     GLuint tex;
     int vertexCount;
+    std::string texPath;
+    std::string modelPath;
 
     UnifromVariable WVPMat;
     UnifromVariable WorldMat;
