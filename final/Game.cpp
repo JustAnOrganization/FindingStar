@@ -18,7 +18,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 
     objects.clear();
     objects.push_back(new Table(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0)));
-    objects.push_back(new Table(*this, vec3(2, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0)));
+    objects.push_back(new Table(*this, vec3(0, 0, 5), vec3(0, 0, 0), vec3(0, 0, 0)));
 }
 
 Game::~Game()

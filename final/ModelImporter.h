@@ -12,7 +12,9 @@
 
 class ModelImporter
 {
-    bool loadObj(
+public:
+
+    static bool loadObj(
             const char * path,
             std::vector<glm::vec3> & vertices,
             std::vector<glm::vec2> & uvs,
@@ -71,7 +73,7 @@ class ModelImporter
                                      &uvIndex[2], &normalIndex[2]);
                 if (matches != 9)
                 {
-                    printf("File can't be read by our simple parser :-( Try exporting with other options\n");
+                    printf("File can't be read by this simple parser\n");
                     fclose(file);
                     return false;
                 }
@@ -90,13 +92,11 @@ class ModelImporter
                 char stupidBuffer[1000];
                 fgets(stupidBuffer, 1000, file);
             }
-
         }
 
         // For each vertex of each triangle
         for (unsigned int i = 0; i < vertexIndices.size(); i++)
         {
-
             // Get the indices of its attributes
             unsigned int vertexIndex = vertexIndices[i];
             unsigned int uvIndex = uvIndices[i];
@@ -111,7 +111,6 @@ class ModelImporter
             vertices.push_back(vertex);
             uvs.push_back(uv);
             normals.push_back(normal);
-
         }
         fclose(file);
         return true;
