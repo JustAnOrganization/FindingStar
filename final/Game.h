@@ -17,19 +17,24 @@ class Game;
 class RenderObject
 {
 public:
-    RenderObject(Game& game, vec3 location, vec3 rotation, vec3 scale): game(game), rotation(rotation), scale(scale)
+    RenderObject(Game& game, vec3 location, vec3 rotation, vec3 scale): game(game), location(location), rotation(rotation), scale(scale)
     {
-        setLocation(location);
+        updateMatrix();
     }
     virtual ~RenderObject()
     {
         destroy();
     }
 
-    void setLocation(const vec3& location)
+    void updateMatrix()
     {
-        this->location = location;
-        worldMat = translate(mat4(), location);
+        worldMat = glm::scale(mat4(), scale);
+
+        worldMat = rotate(worldMat, rotation.x, vec3(1, 0, 0));
+        worldMat = rotate(worldMat, rotation.y, vec3(0, 1, 0));
+        worldMat = rotate(worldMat, rotation.z, vec3(0, 0, 1));
+
+        worldMat = translate(worldMat, location);
     }
 
     virtual void initialize(){};

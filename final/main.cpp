@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Basic.h"
 #include "Player.h"
+#include "TextRenderer.h"
 
 //some code is based on Multi-Object, Multi-Texture Example by Stephen J. Guy, 2018
 
@@ -19,16 +20,12 @@ float lastTime = 0;
 
 bool fullscreen = false;
 
-float rand01(){
-	return rand()/(float)RAND_MAX;
-}
-
-void drawGeometry(int shaderProgram, int startVertFloor, int numVertsFloor, int startVertCube, int numVertsCube
-        , int startVertKey, int numVertsKey);
+//float rand01(){
+//	return rand()/(float)RAND_MAX;
+//}
 
 int main(int argc, char *argv[]){
-	SDL_Init(SDL_INIT_VIDEO);  //Initialize Graphics (for OpenGL)
-
+	SDL_Init(SDL_INIT_VIDEO);
 	//Ask SDL to get a recent version of OpenGL (3.2 or greater)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -39,7 +36,7 @@ int main(int argc, char *argv[]){
 
 	//Create a context to draw in
 	SDL_GLContext context = SDL_GL_CreateContext(window);
-	
+
 	//Load OpenGL extentions with GLAD
 	if (gladLoadGLLoader(SDL_GL_GetProcAddress)){
 		printf("\nOpenGL loaded\n");
@@ -51,6 +48,9 @@ int main(int argc, char *argv[]){
 		printf("ERROR: Failed to initialize OpenGL context.\n");
 		return -1;
 	}
+
+	TextRenderer textRenderer;
+	textRenderer.init();
 
     Game game(screenWidth, screenHeight);
     game.initialize();
@@ -88,11 +88,15 @@ int main(int argc, char *argv[]){
 
 		game.update(deltaTime);
 
-		SDL_GL_SwapWindow(window); //Double buffering
+		//subtitle
+		textRenderer.renderText("To Be Continued.. :)", 25.0f, 25.0f, 1, glm::vec3(1, 1, 1));
+
+		SDL_GL_SwapWindow(window); // Double buffering
 	}
 
     //Clean up
-
+    TTF_Quit();
+    SDL_DestroyWindow(window);
 	SDL_GL_DeleteContext(context);
 	SDL_Quit();
 	return 0;
