@@ -1,16 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include "glm/glm.hpp"
-#include "glad/glad.h"
+#include "Basic.h"
 #include "Player.h"
-
-using namespace std;
-using namespace glm;
 
 class Game;
 
@@ -57,6 +49,12 @@ public:
     void initialize();
 
     void update(float deltaTime);
+
+    //todo
+    bool win()
+    {
+        return false;
+    }
 
     Player player;
 private:

@@ -26,6 +26,7 @@ using namespace glm;
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 #endif //FINALPROJECT_BASIC_H

@@ -5,7 +5,6 @@
 #ifndef FINALPROJECT_TEXTRENDERER_H
 #define FINALPROJECT_TEXTRENDERER_H
 
-#include <map>
 #include "Basic.h"
 
 struct Character {

@@ -5,9 +5,9 @@
 #ifndef FINALPROJECT_TABLE_H
 #define FINALPROJECT_TABLE_H
 
+#include "Basic.h"
 #include "Utils.h"
 #include "Game.h"
-#include "Basic.h"
 
 struct VertexPositionColorUv
 {

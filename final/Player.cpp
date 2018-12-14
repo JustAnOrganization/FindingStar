@@ -39,6 +39,16 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
         //cout << "jumping" << endl;
     }
 
+    //todo
+    if (windowEvent.type == SDL_MOUSEBUTTONDOWN)
+        switch (windowEvent.button.button)
+        {
+            case SDL_BUTTON_LEFT:
+            case SDL_BUTTON_RIGHT:
+                //SDL_ShowSimpleMessageBox(0, "Mouse", "todo: hit test", window);
+                break;
+        }
+
     int mx, my;
     SDL_GetRelativeMouseState(&mx, &my);
     if (mx != 0 || my != 0)
@@ -49,10 +59,6 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
         const float rotSpeed = 1/2.0f;
         mat4 rotMat = glm::rotate(mat4(), mx * rotSpeed * deltaTime, vec3(0, 1, 0));
 
-//        float pitch = asin(direction.y / length(direction));
-//        pitch += my * rotSpeed * deltaTime;
-//        if (pitch > 85 / 180.0 * M_PI) pitch = 85 / 180.0 * M_PI;
-//        else if (pitch < -85 / 180.0 * M_PI) pitch = -85 / 180.0 * M_PI;
         pitchAngle += my * rotSpeed * deltaTime;
         if (pitchAngle > 85 / 180.0 * M_PI) pitchAngle = 85 / 180.0 * M_PI;
         else if (pitchAngle < -85 / 180.0 * M_PI) pitchAngle = -85 / 180.0 * M_PI;
@@ -111,5 +117,9 @@ void Player::update(float deltaTime)
             jumpVelocity = 0;
             isJumping = false;
         }
+
+        //update view matrix
+        vec3 lookPoint = playerPosition + direction;
+        viewMat = lookAt(playerPosition, lookPoint, vec3(0, 1, 0));
     }
 }
