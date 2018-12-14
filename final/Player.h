@@ -8,6 +8,7 @@
 #include "Basic.h"
 
 class Game;
+class Item;
 
 class Player
 {
@@ -27,6 +28,9 @@ public:
         return projectMat * viewMat;
     }
 
+    //todo
+    void pickup(Item* item);
+
     vec3 playerPosition;
     vec3 direction, right;
 private:
@@ -42,6 +46,9 @@ private:
     float nearPlane;
     float farPlane;
     Game& game;
+
+    //carried items
+    std::vector<Item*> items;
 };
 
 

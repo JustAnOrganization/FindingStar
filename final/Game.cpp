@@ -8,18 +8,21 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "Model.h"
+#include "Utils.h"
+#include "Skybox.h"
 
 using namespace glm;
 
-Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height, 1.0, 15.0)
+Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height, 0.01, 50.0)
 {
     screenWidth = width;
     screenHeight = height;
 
     objects.clear();
-    objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/room.obj"));
-    //objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
-    objects.push_back(new Model(*this, vec3(0, 0, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
+    objects.push_back(new Model(*this, vec3(0, -2, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/room.obj"));
+    objects.push_back(new Model(*this, vec3(0, -2, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
+    objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf.obj"));
+    objects.push_back(new Skybox(*this));
 }
 
 Game::~Game()

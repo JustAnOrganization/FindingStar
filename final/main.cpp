@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
 	//Create a window (offsetx, offsety, width, height, flags)
-	SDL_Window* window = SDL_CreateWindow("Game Game", 100, 100, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+	SDL_Window* window = SDL_CreateWindow("Finding Star", 100, 100, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
 
 	//Create a context to draw in
 	SDL_GLContext context = SDL_GL_CreateContext(window);
@@ -61,7 +61,30 @@ int main(int argc, char *argv[]){
 	SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1", SDL_HINT_OVERRIDE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
-	bool quit = false;
+    bool quit = false;
+
+	//init screen start
+	while (!quit)
+	{
+		bool next = false;
+		while (SDL_PollEvent(&windowEvent))
+		{
+            if (windowEvent.type == SDL_QUIT || (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_ESCAPE)) quit = true;
+			if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_SPACE)
+			{
+				next = true;
+			}
+		}
+        glClearColor(0, 0, 0, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        textRenderer.renderText("Finding Star", screenWidth/2.0f - 120, screenHeight/2.0f, 1.2, glm::vec3(1, 1, 1));
+        textRenderer.renderText("press space to start.", screenWidth/2.0f - 150, screenHeight/3.0f, 1, glm::vec3(0.8, 0.8, 1));
+		if (next)
+			break;
+        SDL_GL_SwapWindow(window);
+	}
+	//init screen end
+
 	while (!quit){
         //deltaTime
         lastTime = timePast;
@@ -73,13 +96,13 @@ int main(int argc, char *argv[]){
             if (windowEvent.type == SDL_QUIT) quit = true;
             //List of keycodes: https://wiki.libsdl.org/SDL_Keycode - You can catch many special keys
             //Scancode referes to a keyboard position, keycode referes to the letter (e.g., EU keyboards)
-            if (windowEvent.type == SDL_KEYUP && windowEvent.key.keysym.sym == SDLK_ESCAPE)
+            if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_ESCAPE)
                 quit = true; //Exit event loop
-            if (windowEvent.type == SDL_KEYUP && windowEvent.key.keysym.sym == SDLK_f)
-            { //If "f" is pressed
-                fullscreen = !fullscreen;
-                SDL_SetWindowFullscreen(window, fullscreen ? SDL_WINDOW_FULLSCREEN : 0); //Toggle fullscreen
-            }
+//            if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_f)
+//            { //If "f" is pressed
+//                fullscreen = !fullscreen;
+//                SDL_SetWindowFullscreen(window, fullscreen ? SDL_WINDOW_FULLSCREEN : 0); //Toggle fullscreen
+//            }
             game.player.processEvent(windowEvent, deltaTime);
         }
 
@@ -89,11 +112,31 @@ int main(int argc, char *argv[]){
 
 		game.update(deltaTime);
 
-		//subtitle
-		textRenderer.renderText("To Be Continued.. :)", 25.0f, 25.0f, 1, glm::vec3(1, 1, 1));
+		if (game.win())
+        {
+            textRenderer.renderText("To Be Continued.. :)", 25.0f, 25.0f, 1, glm::vec3(1, 1, 1));
+        }
 
 		SDL_GL_SwapWindow(window); // Double buffering
 	}
+
+	//end screen start
+//    while (!quit)
+//    {
+//        while (SDL_PollEvent(&windowEvent))
+//        {
+//            if (windowEvent.type == SDL_QUIT || (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_ESCAPE)) quit = true;
+//            if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_SPACE)
+//            {
+//            }
+//        }
+//        glClearColor(0, 0, 0, 1.0f);
+//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//        textRenderer.renderText("Finding Star", screenWidth/2.0f - 120, screenHeight/2.0f, 1.2, glm::vec3(1, 1, 1));
+//        textRenderer.renderText("press space to start.", screenWidth/2.0f - 150, screenHeight/3.0f, 1, glm::vec3(0.8, 0.8, 1));
+//        SDL_GL_SwapWindow(window);
+//    }
+	//end screen end
 
     //Clean up
     TTF_Quit();
