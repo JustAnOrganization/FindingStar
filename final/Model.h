@@ -42,6 +42,7 @@ public:
 
     virtual void initialize() override;
     virtual void update(float deltaTime) override;
+    virtual void draw() override;
     virtual void destroy() override;
 
 private:

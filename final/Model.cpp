@@ -83,6 +83,22 @@ void Model::update(float deltaTime)
 {
     RenderObject::update(deltaTime);
 
+}
+
+void Model::destroy()
+{
+    glDeleteProgram(shaderProgram);
+    glDeleteBuffers(1, &vbo);
+    glDeleteVertexArrays(1, &vao);
+    glDeleteTextures(1, &tex);
+
+    RenderObject::destroy();
+}
+
+void Model::draw()
+{
+    RenderObject::draw();
+
     glUseProgram(shaderProgram);
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -105,14 +121,4 @@ void Model::update(float deltaTime)
 
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
     glBindVertexArray(0);
-}
-
-void Model::destroy()
-{
-    glDeleteProgram(shaderProgram);
-    glDeleteBuffers(1, &vbo);
-    glDeleteVertexArrays(1, &vao);
-    glDeleteTextures(1, &tex);
-
-    RenderObject::destroy();
 }

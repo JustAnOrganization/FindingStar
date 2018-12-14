@@ -84,6 +84,31 @@ int main(int argc, char *argv[]){
 	}
 	//init screen end
 
+    //reference: https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping
+	//shadow init start
+//    const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+//    unsigned int depthMapFBO;
+//    glGenFramebuffers(1, &depthMapFBO);
+//    // create depth texture
+//    unsigned int depthMap;
+//    glGenTextures(1, &depthMap);
+//    glBindTexture(GL_TEXTURE_2D, depthMap);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+//    float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+//    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+//    // attach depth texture as FBO's depth buffer
+//    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+//    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+//    glDrawBuffer(GL_NONE);
+//    glReadBuffer(GL_NONE);
+//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    //shadow init end
+
+
 	while (!quit){
         //deltaTime
         lastTime = timePast;
@@ -111,31 +136,40 @@ int main(int argc, char *argv[]){
 
 		game.update(deltaTime);
 
+//shadow begin
+//        glm::mat4 lightProjection, lightView;
+//        glm::mat4 lightSpaceMatrix;
+//        float near_plane = 1.0f, far_plane = 7.5f;
+//        //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
+//        lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+//        lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+//        lightSpaceMatrix = lightProjection * lightView;
+//        // render scene from light's point of view
+//        simpleDepthShader.use();
+//        simpleDepthShader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
+//
+//        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+//        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+//        glClear(GL_DEPTH_BUFFER_BIT);
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, woodTexture);
+//        renderScene(simpleDepthShader);
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//
+//        // reset viewport
+//        glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//shadow end
+
+		game.draw();
+
 		if (game.win())
         {
-            textRenderer.renderText("To Be Continued.. :)", 25.0f, 25.0f, 1, glm::vec3(1, 1, 1));
+            textRenderer.renderText("The End.", screenWidth/2.0f - 80, screenHeight/2.0f, 1.2, glm::vec3(0.8, 1, 0.8));
         }
 
 		SDL_GL_SwapWindow(window); // Double buffering
 	}
-
-	//end screen start
-//    while (!quit)
-//    {
-//        while (SDL_PollEvent(&windowEvent))
-//        {
-//            if (windowEvent.type == SDL_QUIT || (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_ESCAPE)) quit = true;
-//            if (windowEvent.type == SDL_KEYDOWN && windowEvent.key.keysym.sym == SDLK_SPACE)
-//            {
-//            }
-//        }
-//        glClearColor(0, 0, 0, 1.0f);
-//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        textRenderer.renderText("Finding Star", screenWidth/2.0f - 120, screenHeight/2.0f, 1.2, glm::vec3(1, 1, 1));
-//        textRenderer.renderText("press space to start.", screenWidth/2.0f - 150, screenHeight/3.0f, 1, glm::vec3(0.8, 0.8, 1));
-//        SDL_GL_SwapWindow(window);
-//    }
-	//end screen end
 
     //Clean up
     TTF_Quit();
