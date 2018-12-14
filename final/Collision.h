@@ -8,14 +8,14 @@
 #include "Basic.h"
 
 //todo
-//sphere collison
+//collison
 class Collision
 {
 public:
 
 private:
-    float radius;
     vec3 location;
+    vec3 extend;
 };
 
 

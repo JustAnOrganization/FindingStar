@@ -13,7 +13,7 @@
 
 using namespace glm;
 
-Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height, 0.01, 50.0)
+Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height, 0.01, 70.0)
 {
     screenWidth = width;
     screenHeight = height;
@@ -53,5 +53,13 @@ void Game::update(float deltaTime)
     for (auto* object: objects)
     {
         object->update(deltaTime);
+    }
+}
+
+void Game::draw()
+{
+    for (auto* object: objects)
+    {
+        object->draw();
     }
 }

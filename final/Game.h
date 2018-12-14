@@ -31,6 +31,7 @@ public:
 
     virtual void initialize(){};
     virtual void update(float deltaTime){};
+    virtual void draw() {};
     virtual void destroy(){};
 
 protected:
@@ -49,6 +50,8 @@ public:
     void initialize();
 
     void update(float deltaTime);
+
+    void draw();
 
     //todo
     bool win()

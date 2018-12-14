@@ -74,20 +74,7 @@ void Skybox::update(float deltaTime)
 {
     RenderObject::update(deltaTime);
 
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    glUseProgram(shaderProgram);
-
-    mat4 wvp = game.player.viewProjectionMat() * worldMat;
-    WVPMat << wvp;
-
-    glDisable(GL_CULL_FACE);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glBindVertexArray(0);
 }
 
 void Skybox::destroy()
@@ -126,4 +113,24 @@ void Skybox::loadCubemap()
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+}
+
+void Skybox::draw()
+{
+    RenderObject::draw();
+
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glUseProgram(shaderProgram);
+
+    mat4 wvp = game.player.viewProjectionMat() * worldMat;
+    WVPMat << wvp;
+
+    glDisable(GL_CULL_FACE);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
 }

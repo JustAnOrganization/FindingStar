@@ -7,8 +7,39 @@
 
 #include "Model.h"
 
+struct Trigger
+{
+    vec3 position;
+    vec3 radius;
+
+
+};
+
+struct Animation
+{
+    vec3 rotateTarget;
+    vec3 translateTarget;
+
+    void update(float deltaTime);
+};
+
 class AnimatedObject: public Model
 {
+public:
+    AnimatedObject(Game& game, vec3 location, vec3 rotation, vec3 scale, std::string modelPath="models/desk.obj"
+    , std::string texPath="textures/wood.bmp")
+    : Model(game, location, rotation, scale, modelPath, texPath)
+    {
+    }
+
+    virtual void initialize() override;
+    virtual void update(float deltaTime) override;
+    virtual void draw() override;
+    virtual void destroy() override;
+
+private:
+    Animation anim;
+    bool trigger = false;
 
 };
 
