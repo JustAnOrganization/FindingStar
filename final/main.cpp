@@ -25,6 +25,7 @@ bool fullscreen = false;
 //}
 
 int main(int argc, char *argv[]){
+	
 	SDL_Init(SDL_INIT_VIDEO);
 	//Ask SDL to get a recent version of OpenGL (3.2 or greater)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);

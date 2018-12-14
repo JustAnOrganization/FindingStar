@@ -12,7 +12,9 @@
 #include <SDL2/SDL_ttf.h>
 #else
 #include <SDL.h>
- #include <SDL_opengl.h>
+#include <SDL_opengl.h>
+//#include <SDL2_ttf-2.0.14/SDL_ttf.h>
+#include <SDL_ttf.h>
 #endif
 #include <cstdio>
 
