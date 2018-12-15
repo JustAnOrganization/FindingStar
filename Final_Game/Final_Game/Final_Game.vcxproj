@@ -154,7 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\final\AnimatedObject.h" />
+    <ClInclude Include="..\..\final\Animation.h" />
     <ClInclude Include="..\..\final\Basic.h" />
     <ClInclude Include="..\..\final\Collision.h" />
     <ClInclude Include="..\..\final\Game.h" />
@@ -316,6 +316,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\final\.DS_Store" />
+    <None Include="..\..\final\FinalGame.sln" />
+    <None Include="..\..\final\FinalGame.vcxproj" />
+    <None Include="..\..\final\FinalGame.vcxproj.filters" />
+    <None Include="..\..\final\FinalGame.vcxproj.user" />
     <None Include="..\..\final\glm\detail\func_common.inl" />
     <None Include="..\..\final\glm\detail\func_exponential.inl" />
     <None Include="..\..\final\glm\detail\func_geometric.inl" />
@@ -427,13 +431,12 @@
     <None Include="..\..\final\zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\final\AnimatedObject.cpp" />
+    <ClCompile Include="..\..\final\Animation.cpp" />
     <ClCompile Include="..\..\final\Collision.cpp" />
     <ClCompile Include="..\..\final\Game.cpp" />
     <ClCompile Include="..\..\final\glad\glad.c" />
     <ClCompile Include="..\..\final\glm\detail\dummy.cpp" />
     <ClCompile Include="..\..\final\glm\detail\glm.cpp" />
-    <ClCompile Include="..\..\final\Item.cpp" />
     <ClCompile Include="..\..\final\main.cpp" />
     <ClCompile Include="..\..\final\Model.cpp" />
     <ClCompile Include="..\..\final\ModelImporter.cpp" />

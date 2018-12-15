@@ -20,9 +20,9 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 
     objects.clear();
     //models
-    objects.push_back(new Model(*this/*game*/, vec3(0, -2, 0)/*location*/, vec3(0, 0, 0)/*rotation*/, vec3(0.01, 0.01, 0.01)/*scale*/, "models/room.obj"/*model path*//*, teture path*/));
+    objects.push_back(new Model(*this/*game*/, vec3(0, -200, 0)/*location*/, vec3(0, 0, 0)/*rotation*/, vec3(0.01, 0.01, 0.01)/*scale*/, "models/room.obj"/*model path*//*, teture path*/));
 
-    objects.push_back(new Model(*this, vec3(0, -2, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
+    objects.push_back(new Model(*this, vec3(500, 0, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/desk.obj"));
 
     objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf.obj"));
 
