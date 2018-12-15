@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+#include "Game.h"
 
 void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
 {
@@ -87,9 +88,7 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
         vec3 forward = cross(vec3(0, 1, 0), right);
         newPosition += movement.y * forward;
 
-        //todo: check collision
-        //const float playerHalfSize = 0.05;
-        //if (checkCollision(newPosition))
+        if (game.checkCollision(newPosition))
         {
             playerPosition = newPosition;
         }

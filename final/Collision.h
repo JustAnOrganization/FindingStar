@@ -7,15 +7,16 @@
 
 #include "Basic.h"
 
-//todo
-//collison
-class Collision
+class BoxCollision2D
 {
 public:
+    BoxCollision2D(vec2 location, vec2 extend, bool out = false): location(location), extend(extend), bOut(out){ }
 
+    bool check(vec3 position);
 private:
-    vec3 location;
-    vec3 extend;
+    bool bOut;
+    vec2 location;
+    vec2 extend;
 };
 
 

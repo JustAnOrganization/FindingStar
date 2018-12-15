@@ -3,6 +3,7 @@
 
 #include "Basic.h"
 #include "Player.h"
+#include "Collision.h"
 
 class Game;
 
@@ -59,9 +60,13 @@ public:
         return false;
     }
 
+    bool checkCollision(vec3 position);
+
     Player player;
 private:
     vector<RenderObject*> objects;
+    vector<BoxCollision2D> collisions;
+
     int screenWidth;
     int screenHeight;
 };

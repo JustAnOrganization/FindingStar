@@ -10,7 +10,6 @@ game
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -19,7 +18,6 @@ game
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -29,7 +27,6 @@ game
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe

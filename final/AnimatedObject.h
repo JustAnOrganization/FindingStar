@@ -7,12 +7,20 @@
 
 #include "Model.h"
 
+//sphere trigger
 struct Trigger
 {
+    Trigger(vec3 position, vec3 radius): position(position), radius(radius) {}
+    bool trigger(vec3 playerPosition, vec3 playerForward)
+    {
+        //ray to sphere && distance
+        if (distance(playerPosition, position) > 0.5)
+            return false;
+        //todo
+
+    }
     vec3 position;
     vec3 radius;
-
-
 };
 
 struct Animation

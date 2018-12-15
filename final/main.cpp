@@ -168,6 +168,10 @@ int main(int argc, char *argv[]){
         {
             textRenderer.renderText("The End.", screenWidth/2.0f - 80, screenHeight/2.0f, 1.2, glm::vec3(0.8, 1, 0.8));
         }
+        else
+        {
+			textRenderer.renderText(".", screenWidth/2.0f, screenHeight/2.0f, 1, glm::vec3(1, 1, 1));
+		}
 
 		SDL_GL_SwapWindow(window); // Double buffering
 	}

@@ -23,6 +23,10 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     objects.push_back(new Model(*this, vec3(0, -2, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
     objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf.obj"));
     objects.push_back(new Skybox(*this));
+
+    collisions.clear();
+    collisions.push_back(BoxCollision2D(vec2(0, 0),vec2(10, 10), true));
+
 }
 
 Game::~Game()
@@ -62,4 +66,14 @@ void Game::draw()
     {
         object->draw();
     }
+}
+
+bool Game::checkCollision(vec3 position)
+{
+    for (auto& collison: collisions)
+    {
+        if (!collison.check(position))
+            return false;
+    }
+    return true;
 }
