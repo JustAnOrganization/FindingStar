@@ -44,6 +44,9 @@ public:
     virtual void draw() override;
     virtual void destroy() override;
     void triggered();
+    void pickup();
+
+    bool bPickedup = false;
 private:
     GLuint shaderProgram;
     GLuint vao, vbo;
@@ -51,9 +54,10 @@ private:
     int vertexCount;
     std::string texPath;
     std::string modelPath;
-    bool bCanPickup;
-    bool bHasAnimation;
 
+    bool bCanPickup;
+    bool bHasAnim;
+    Animation anim;
 
     UnifromVariable WVPMat;
     UnifromVariable WorldMat;

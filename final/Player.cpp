@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "Game.h"
+#include "Model.h"
 
 void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
 {
@@ -45,20 +46,14 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
         {
             case SDL_BUTTON_LEFT:
             case SDL_BUTTON_RIGHT:
-                break;
-                //todo
-                //                for (auto& collision: game.collisions)
-//                {
-//                    collision.check()
-//                }
-//                for (auto* object: game.objects)
-//                {
-//                    Item* item;
-//                    if ((item = dynamic_cast<Item>(object)) != nullptr)
-//                    {
-//                        item.
-//                    }
-//                }
+                for (auto& trigger: game.triggers)
+                {
+                    if (trigger.trigger(playerPosition, direction))
+                    {
+                        trigger.model.triggered();
+                        break;
+                    }
+                }
         }
 
     int mx, my;
@@ -131,6 +126,22 @@ void Player::update(float deltaTime)
         //update view matrix
         vec3 lookPoint = playerPosition + direction;
         viewMat = lookAt(playerPosition, lookPoint, vec3(0, 1, 0));
+    }
+
+    //update carried model
+    int cnt = 0;
+    for (auto* object: game.objects)
+    {
+        Model* model;
+        if ((model = dynamic_cast<Model*>(object)) != nullptr)
+        {
+            if (model->bPickedup)
+            {
+                //todo: adjust
+                model->setLocation(playerPosition+direction+right*0.5f+cross(right, direction)*0.2f*(float)cnt);
+                cnt++;
+            }
+        }
     }
 }
 

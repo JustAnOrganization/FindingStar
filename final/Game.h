@@ -20,6 +20,34 @@ public:
         destroy();
     }
 
+    void setLocation(vec3 newLocation)
+    {
+        location = newLocation;
+        updateMatrix();
+    }
+    vec3 getLocation()
+    {
+        return location;
+    }
+    vec3 getRotation()
+    {
+        return rotation;
+    }
+    void setRotation(vec3 newRot)
+    {
+        rotation = newRot;
+        updateMatrix();
+    }
+    vec3 getScale()
+    {
+        return scale;
+    }
+    void setScale(vec3 newScale)
+    {
+        scale = newScale;
+        updateMatrix();
+    }
+
     void updateMatrix()
     {
         worldMat = glm::scale(mat4(), scale);
@@ -44,6 +72,7 @@ protected:
 
 class Game
 {
+    friend class Player;
 public:
     Game(int width, int height);
 
