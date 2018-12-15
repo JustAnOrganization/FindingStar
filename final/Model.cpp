@@ -83,6 +83,7 @@ void Model::update(float deltaTime)
 {
     RenderObject::update(deltaTime);
 
+    anim.update(deltaTime);
 }
 
 void Model::destroy()
@@ -125,11 +126,21 @@ void Model::draw()
 
 void Model::triggered()
 {
-    //todo
-    //if can pick up, pick up
-    //if has animation, animate
+    if (bCanPickup)
+    {
+        pickup();
+    }
+    else if (bHasAnim)
+    {
+        anim.play();
+    }
 }
 
 Model::Model(Game &game, vec3 location, vec3 rotation, vec3 scale, string modelPath, string texPath, bool bCanPickup,
              bool bHasAnimaiton)
-        : RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnimation(bHasAnimaiton) { }
+        : anim(*this), RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnim(bHasAnimaiton) { }
+
+void Model::pickup()
+{
+    bPickedup = true;
+}

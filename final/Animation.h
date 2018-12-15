@@ -17,17 +17,25 @@ struct Trigger
     Model& model;
     vec3 position;
     float radius, distance;
+    bool bActive;
 };
 
 struct Animation
 {
-    Animation(vec3 translateTarget, vec3 rotateTarget):translateTarget(translateTarget),rotateTarget(rotateTarget) { }
+    Animation(Model& model): model(model) { }
+    Animation(Model& model,vec3 translateTarget, float rotateY):model(model), translateTarget(translateTarget),rotateTarget(rotateY) { }
 
-    vec3 rotateTarget;
+    float rotateTarget;
     vec3 translateTarget;
 
-    //todo
+    void play();
     void update(float deltaTime);
+private:
+    Model& model;
+    bool bPlaying = false;
+    float originRot;
+    vec3 originTrans;
+    float currPercent=0;
 };
 
 
