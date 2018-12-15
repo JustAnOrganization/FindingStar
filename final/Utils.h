@@ -7,7 +7,7 @@
 
 #include "Basic.h"
 
-#define DEBUG_ON false
+#define DEBUG_ON true//false
 
 class UnifromVariable
 {

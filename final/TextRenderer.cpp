@@ -8,7 +8,7 @@
 void TextRenderer::init()
 {
     TTF_Init();
-    TTF_Font *font = TTF_OpenFont("./font/veteran_typewriter.ttf", 35);
+    TTF_Font *font = TTF_OpenFont("font/veteran_typewriter.ttf", 35);
     SDL_Color color = { 255, 0, 0 };
     SDL_Surface *face = NULL;
 
