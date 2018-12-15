@@ -19,14 +19,22 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     screenHeight = height;
 
     objects.clear();
-    objects.push_back(new Model(*this, vec3(0, -2, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/room.obj"));
+    //models
+    objects.push_back(new Model(*this/*game*/, vec3(0, -2, 0)/*location*/, vec3(0, 0, 0)/*rotation*/, vec3(0.01, 0.01, 0.01)/*scale*/, "models/room.obj"/*model path*//*, teture path*/));
+
     objects.push_back(new Model(*this, vec3(0, -2, 5), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01)));
+
     objects.push_back(new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf.obj"));
+
+    Model* key = new Model(*this, vec3(0, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/key.obj");
+    objects.push_back(key);
+    triggers.push_back(Trigger(*key/*model*/, vec3(0, 0, 0)/*position*/, 0.1/*radius*/, 0.5/*distance*/));
+
+    //skybox
     objects.push_back(new Skybox(*this));
 
     collisions.clear();
     collisions.push_back(BoxCollision2D(vec2(0, 0),vec2(10, 10), true));
-
 }
 
 Game::~Game()

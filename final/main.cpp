@@ -1,6 +1,6 @@
 
-#include "Game.h"
 #include "Basic.h"
+#include "Game.h"
 #include "Player.h"
 #include "TextRenderer.h"
 
@@ -24,9 +24,32 @@ bool fullscreen = false;
 //	return rand()/(float)RAND_MAX;
 //}
 
-int main(int argc, char *argv[]){
-	
-	SDL_Init(SDL_INIT_VIDEO);
+int main(int argc, char *argv[])
+{
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+	//Mix_Init(MIX_INIT_MP3);
+
+	Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
+	Mix_Music *music = Mix_LoadMUS("audio/test.mp3");
+	Mix_PlayMusic(music, -1);
+
+	if (MIX_INIT_MP3 != (Mix_Init(MIX_INIT_MP3))) {
+		printf("mix init error: %s\n", Mix_GetError());
+		return -1;
+	}
+	//Mix_Chunk *effect = NULL;
+	//effect = Mix_LoadWAV( "effect.wav" );
+	//Mix_PlayChannel( -1, effect, 0 );
+//	if( Mix_PausedMusic() == 1 )
+//	{
+//		Mix_ResumeMusic();
+//	}
+//	else
+//	{
+//		Mix_PauseMusic();
+//	}
+//	Mix_HaltMusic();
+
 	//Ask SDL to get a recent version of OpenGL (3.2 or greater)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -180,6 +203,11 @@ int main(int argc, char *argv[]){
     TTF_Quit();
     SDL_DestroyWindow(window);
 	SDL_GL_DeleteContext(context);
+
+	//Mix_FreeChunk( effect );
+	Mix_FreeMusic( music );
+	Mix_CloseAudio();
+
 	SDL_Quit();
 	return 0;
 }

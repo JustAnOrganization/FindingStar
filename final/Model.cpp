@@ -122,3 +122,14 @@ void Model::draw()
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
     glBindVertexArray(0);
 }
+
+void Model::triggered()
+{
+    //todo
+    //if can pick up, pick up
+    //if has animation, animate
+}
+
+Model::Model(Game &game, vec3 location, vec3 rotation, vec3 scale, string modelPath, string texPath, bool bCanPickup,
+             bool bHasAnimaiton)
+        : RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnimation(bHasAnimaiton) { }

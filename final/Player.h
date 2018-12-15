@@ -23,13 +23,7 @@ public:
     void processEvent(SDL_Event& windowEvent, float deltaTime);
     void update(float deltaTime);
 
-    glm::mat4 viewProjectionMat() const
-    {
-        return projectMat * viewMat;
-    }
-
-    //todo
-    void pickup(Item* item);
+    glm::mat4 viewProjectionMat() const;
 
     vec3 playerPosition;
     vec3 direction, right;
@@ -46,9 +40,6 @@ private:
     float nearPlane;
     float farPlane;
     Game& game;
-
-    //carried items
-    std::vector<Item*> items;
 };
 
 

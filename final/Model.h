@@ -37,14 +37,13 @@ class Model: public RenderObject
 {
 public:
     Model(Game& game, vec3 location, vec3 rotation, vec3 scale, std::string modelPath="models/desk.obj"
-            , std::string texPath="textures/wood.bmp")//"models/Wall_Paper.jpg"
-    : RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath) { }
+            , std::string texPath="models/Wall_Paper_2_bmp.bmp", bool bCanPickup = false, bool bHasAnimaiton = false);
 
     virtual void initialize() override;
     virtual void update(float deltaTime) override;
     virtual void draw() override;
     virtual void destroy() override;
-
+    void triggered();
 private:
     GLuint shaderProgram;
     GLuint vao, vbo;
@@ -52,6 +51,9 @@ private:
     int vertexCount;
     std::string texPath;
     std::string modelPath;
+    bool bCanPickup;
+    bool bHasAnimation;
+
 
     UnifromVariable WVPMat;
     UnifromVariable WorldMat;

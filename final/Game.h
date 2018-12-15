@@ -4,6 +4,7 @@
 #include "Basic.h"
 #include "Player.h"
 #include "Collision.h"
+#include "Animation.h"
 
 class Game;
 
@@ -66,6 +67,7 @@ public:
 private:
     vector<RenderObject*> objects;
     vector<BoxCollision2D> collisions;
+    vector<Trigger> triggers;
 
     int screenWidth;
     int screenHeight;

@@ -40,14 +40,25 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
         //cout << "jumping" << endl;
     }
 
-    //todo
     if (windowEvent.type == SDL_MOUSEBUTTONDOWN)
         switch (windowEvent.button.button)
         {
             case SDL_BUTTON_LEFT:
             case SDL_BUTTON_RIGHT:
-                //SDL_ShowSimpleMessageBox(0, "Mouse", "todo: hit test", window);
                 break;
+                //todo
+                //                for (auto& collision: game.collisions)
+//                {
+//                    collision.check()
+//                }
+//                for (auto* object: game.objects)
+//                {
+//                    Item* item;
+//                    if ((item = dynamic_cast<Item>(object)) != nullptr)
+//                    {
+//                        item.
+//                    }
+//                }
         }
 
     int mx, my;
@@ -121,4 +132,9 @@ void Player::update(float deltaTime)
         vec3 lookPoint = playerPosition + direction;
         viewMat = lookAt(playerPosition, lookPoint, vec3(0, 1, 0));
     }
+}
+
+glm::mat4 Player::viewProjectionMat() const
+{
+    return projectMat * viewMat;
 }
