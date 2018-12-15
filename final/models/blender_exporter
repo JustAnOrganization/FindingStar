@@ -1,0 +1,10 @@
+import bpy
+
+destfolder = "C:\\Users\\6174l\\Documents\\GitHub\\FindingStar\\final\\models\\"
+bpy.ops.object.select_all(action = 'DESELECT')
+sce = bpy.data.scenes['Scene']
+for ob in sce.objects:
+    if ob.type == 'MESH': 
+        bpy.ops.object.select_pattern(pattern = ob.name)
+        bpy.ops.export_scene.obj(filepath = destfolder + ob.name + ".obj", use_selection = True, use_triangles = True)
+        ob.select = False
