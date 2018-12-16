@@ -138,7 +138,9 @@ void Player::update(float deltaTime)
             if (model->bPickedup)
             {
                 //todo: adjust
-                model->setLocation(playerPosition+direction+right*0.5f+cross(right, direction)*0.2f*(float)cnt);
+                vec3 newPosition = playerPosition+direction+right*0.01f+cross(right, direction)*0.01f*(float)cnt;
+                model->setLocation(newPosition);
+                printf("updating picked model %s: %f, %f, %f\n", model->modelPath.c_str(), newPosition.x, newPosition.y, newPosition.z);
                 cnt++;
             }
         }
