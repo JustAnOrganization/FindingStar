@@ -140,6 +140,11 @@ void Player::update(float deltaTime)
                 //todo: adjust
                 vec3 newPosition = playerPosition+direction;//+right*0.01f+cross(right, direction)*0.01f*(float)cnt;
                 model->setLocation(newPosition);
+//                vec3 dir = model->getForward();
+//                dir = normalize(dir);
+//                vec3 rot =model->getRotation();
+//                rot.y = acos(dot(direction, dir));
+//                model->setRotation(rot);
                 //printf("updating picked model %s: %f, %f, %f\n", model->modelPath.c_str(), newPosition.x, newPosition.y, newPosition.z);
                 cnt++;
             }

@@ -38,6 +38,14 @@ public:
         rotation = newRot;
         updateMatrix();
     }
+    vec3 getForward()
+    {
+        mat4 rotMat = mat4();
+        rotMat = rotate(rotMat, rotation.x, vec3(1, 0, 0));
+        rotMat = rotate(rotMat, rotation.y, vec3(0, 1, 0));
+        rotMat = rotate(rotMat, rotation.z, vec3(0, 0, 1));
+        return vec3(vec4(0,0,1,0)*rotMat);
+    }
     vec3 getScale()
     {
         return scale;

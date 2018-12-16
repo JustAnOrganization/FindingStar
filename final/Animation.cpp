@@ -15,6 +15,7 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
     if (glm::distance(playerPosition, position) > distance)
         return false;
 
+    return true;
     playerForward = normalize(playerForward);
 
     float b = dot(2.0f * playerForward, (playerPosition - position));
