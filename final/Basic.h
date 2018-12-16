@@ -19,6 +19,7 @@
 #include <SDL_mixer.h>
 #endif
 #include <cstdio>
+#include <math.h>
 
 #define GLM_FORCE_RADIANS
 #include "glm/glm.hpp"
