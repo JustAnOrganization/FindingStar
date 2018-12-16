@@ -59,13 +59,13 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	//objects.push_back(new Model(*this, vec3(-400, 0, 0), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf_door.obj", false, true));
 
 	/* Keys */
-    Model* key = new Model(*this, vec3(400, -30, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/key.obj", "models/bronze.bmp", true, true);
+    Model* key = new Model(*this, vec3(400, -30, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/key.obj", "models/bronze.bmp", true);
     objects.push_back(key);
     triggers.push_back(Trigger(*key/*model*/, vec3(0, 0, 0)/*position*/, 0.1/*radius*/, 0.5/*distance*/));
 
 	/* Photo */
-	Model* photo_f = new Model(*this, vec3(-400, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/Photo_Front.obj", "models/blur_astro.bmp", true, true);
-	Model* photo_b = new Model(*this, vec3(-400, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/Photo_Back.obj", "models/photo_back.bmp", true, true);
+	Model* photo_f = new Model(*this, vec3(-400, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/Photo_Front.obj", "models/blur_astro.bmp", true);
+	Model* photo_b = new Model(*this, vec3(-400, 0, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/Photo_Back.obj", "models/photo_back.bmp", true);
 
 
     //skybox
