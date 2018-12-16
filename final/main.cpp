@@ -13,6 +13,11 @@ const char* INSTRUCTIONS =
 "Up/down/left/right - Moves.\n"
 "***************\n";
 
+std::string intro_text_1 = "Hello, My Friend: There is not much time left for me in this world.";
+std::string intro_text_2 = "Don't be sad. I'm an old man now. ";
+std::string intro_text_3 = "There is one last thing I ask from you: Please find my star.";
+std::string intro_text_4 = "It's somewhere in my home. ";
+
 int screenWidth = 800;
 int screenHeight = 600;
 float timePast = 0;
@@ -100,8 +105,12 @@ int main(int argc, char *argv[])
 		}
         glClearColor(0, 0, 0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        textRenderer.renderText("Finding Star", screenWidth/2.0f - 120, screenHeight/2.0f, 1.2, glm::vec3(1, 1, 1));
-        textRenderer.renderText("press space to start.", screenWidth/2.0f - 150, screenHeight/3.0f, 1, glm::vec3(0.8, 0.8, 1));
+        textRenderer.renderText("Finding Star", screenWidth/2.0f - 120, screenHeight/ 1.5f, 1.2, glm::vec3(1, 1, 1));
+		textRenderer.renderText(intro_text_1, screenWidth / 2.0f - 250, screenHeight / 2.f, 0.5, glm::vec3(1, 1, 1));
+		textRenderer.renderText(intro_text_2, screenWidth / 2.0f - 120, screenHeight / 2.2f, 0.5, glm::vec3(1, 1, 1));
+		textRenderer.renderText(intro_text_3, screenWidth / 2.0f - 250, screenHeight / 2.4f, 0.5, glm::vec3(1, 1, 1));
+		textRenderer.renderText(intro_text_4, screenWidth / 2.0f - 100, screenHeight / 2.8f, 0.5, glm::vec3(1, 1, 1));
+        textRenderer.renderText("press space to start.", screenWidth/2.0f - 150, screenHeight/4.0f, 1, glm::vec3(0.8, 0.8, 1));
 		if (next)
 			break;
         SDL_GL_SwapWindow(window);

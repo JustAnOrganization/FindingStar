@@ -92,6 +92,8 @@ public:
 
     void draw();
 
+	void RenderText(vector<string>texts);
+
     //todo
     bool win()
     {

@@ -1,4 +1,4 @@
-﻿  Game.cpp
-c:\users\6174l\documents\github\findingstar\final\game.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\6174l\documents\github\findingstar\final\game.cpp(84): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  main.cpp
+c:\users\6174l\documents\github\findingstar\final\main.cpp(108): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\6174l\documents\github\findingstar\final\main.cpp(201): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Final_Game.vcxproj -> C:\Users\6174l\Documents\GitHub\FindingStar\Final_Game\Debug\Final_Game.exe

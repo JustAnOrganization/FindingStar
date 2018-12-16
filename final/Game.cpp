@@ -14,6 +14,13 @@
 
 using namespace glm;
 
+std::string key_text_1 = "Papa,";
+std::string key_text_2 = "If you are reading this, it probably means I can't tell you the story from Andromeda myself.";
+std::string key_text_3 = "I don't regret joining this mission. See me come back as a pinch of stardust.";
+std::string key_text_4 = " Yours, Stella";
+std::vector<string> key_texts = vector<string>{ key_text_1,key_text_2,key_text_3, key_text_4 };
+
+
 Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height, 0.01, 70.0)
 {
     screenWidth = width;
@@ -51,6 +58,11 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
     objects.push_back(key);
     triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 4)/*position*/, 1/*radius*/, 2/*distance*/));
+
+	/* Key_Text */
+	if (key->bPickedup) {
+		RenderText(key_texts);
+	}
 	
 	/* Shelf */
     objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Shelf_Body.obj", "models/Wood-Textures-bmp.bmp"));
@@ -60,7 +72,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Lock.obj", "models/bronze.bmp"));
 
 	/* Shelf doors */
-	/*Model* door_right = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
+	Model* door_right = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(door_right);
 	door_right->setAnim(Animation(door_right, vec3(-3, 0, -0.55), M_PI / 2));
 	door_right->setCondition(key->bPickedup);
@@ -69,7 +81,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(door_left);
 	door_left->setAnim(Animation(door_left, vec3(-4, 0, 0.55), -M_PI / 2));
 	door_left->setCondition(key->bPickedup);
-	triggers.push_back(Trigger(*door_left, vec3(-4, 0, 0.85), 1, 6));*/
+	triggers.push_back(Trigger(*door_left, vec3(-4, 0, 0.85), 1, 6));
 		
 
 	/* Photo */
@@ -147,4 +159,8 @@ bool Game::checkCollision(vec3 position)
             return false;
     }
     return true;
+}
+
+void Game::RenderText(vector<string> texts) {
+
 }
