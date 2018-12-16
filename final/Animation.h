@@ -22,8 +22,8 @@ struct Trigger
 
 struct Animation
 {
-    Animation(Model& model): model(model) { }
-    Animation(Model& model,vec3 translateTarget, float rotateY):model(model), translateTarget(translateTarget),rotateTarget(rotateY) { }
+    Animation(Model* model): model(model) { }
+    Animation(Model* model,vec3 translateTarget, float rotateY):model(model), translateTarget(translateTarget),rotateTarget(rotateY) { }
 
     float rotateTarget;
     vec3 translateTarget;
@@ -31,7 +31,7 @@ struct Animation
     void play();
     void update(float deltaTime);
 private:
-    Model& model;
+    Model* model;
     bool bPlaying = false;
     float originRot;
     vec3 originTrans;
