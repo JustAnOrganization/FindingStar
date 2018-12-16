@@ -56,8 +56,8 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(new Model(*this, vec3(-400, 0, 0), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/BookShelf/Lock.obj", "models/bronze.bmp"));
 
 	/* Shelf doors */
-	//objects.push_back(new Model(*this, vec3(-400, 0, 0), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf_door.obj", false, true));
-
+	objects.push_back(new Model(*this, vec3(-400, 0, 5), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
+	objects.push_back(new Model(*this, vec3(-400, 0, 85), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
 	/* Keys */
     Model* key = new Model(*this, vec3(400, -30, 0), vec3(0, 0, 0), vec3(0.01, 0.01, 0.01), "models/key.obj", "models/bronze.bmp", true);
     objects.push_back(key);
