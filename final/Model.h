@@ -37,7 +37,7 @@ class Model: public RenderObject
 {
 public:
     Model(Game& game, vec3 location, vec3 rotation, vec3 scale, std::string modelPath="models/desk.obj"
-            , std::string texPath="models/Wall_Paper_2_bmp.bmp", bool bCanPickup = false, bool bHasAnimaiton = false);
+            , std::string texPath="models/Wall_Paper_2_bmp.bmp", bool bCanPickup = false);
 
     virtual void initialize() override;
     virtual void update(float deltaTime) override;
@@ -45,15 +45,16 @@ public:
     virtual void destroy() override;
     void triggered();
     void pickup();
+    void setAnim(const Animation& anim);
 
     bool bPickedup = false;
+    std::string modelPath;
 private:
     GLuint shaderProgram;
     GLuint vao, vbo;
     GLuint tex;
     int vertexCount;
     std::string texPath;
-    std::string modelPath;
 
     bool bCanPickup;
     bool bHasAnim;

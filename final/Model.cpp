@@ -6,6 +6,7 @@
 #include "Utils.h"
 #include "ModelImporter.h"
 #include "Game.h"
+#include "Animation.h"
 
 void Model::initialize()
 {
@@ -40,15 +41,23 @@ void Model::initialize()
     //glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    //What to do outside 0-1 range
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     //Load the texture into memory
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w,surface->h, 0, GL_BGR,GL_UNSIGNED_BYTE,surface->pixels);
     glGenerateMipmap(GL_TEXTURE_2D); //Mip maps the texture
+
+    //What to do outside 0-1 range
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    GLfloat largest_supported_anisotropic;
+    glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropic);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropic);
 
     SDL_FreeSurface(surface);
     //// End Allocate Texture ///////
@@ -136,11 +145,16 @@ void Model::triggered()
     }
 }
 
-Model::Model(Game &game, vec3 location, vec3 rotation, vec3 scale, string modelPath, string texPath, bool bCanPickup,
-             bool bHasAnimaiton)
-        : anim(*this), RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnim(bHasAnimaiton) { }
+Model::Model(Game &game, vec3 location, vec3 rotation, vec3 scale, string modelPath, string texPath, bool bCanPickup)
+        : anim(this), RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnim(false) { }
 
 void Model::pickup()
 {
     bPickedup = true;
+}
+
+void Model::setAnim(const Animation& anim)
+{
+    bHasAnim = true;
+    this->anim = anim;
 }

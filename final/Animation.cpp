@@ -9,6 +9,8 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
 {
     if (!bActive) return false;
 
+    printf("%s dist:%f\n", model.modelPath.c_str(), glm::distance(playerPosition, position));
+
     //ray to sphere && distance
     if (glm::distance(playerPosition, position) > distance)
         return false;
@@ -33,8 +35,8 @@ void Animation::play()
 {
     if (!bPlaying)
     {
-        originTrans = model.getLocation();
-        originRot = model.getRotation().y;
+        originTrans = model->getLocation();
+        originRot = model->getRotation().y;
     }
     bPlaying = true;
 }
@@ -43,7 +45,7 @@ void Animation::update(float deltaTime)
 {
     if (bPlaying)
     {
-        currPercent += deltaTime * 3.0f;
+        currPercent += deltaTime * 2.0f;
         if (currPercent >= 1)
         {
             currPercent = 1;
@@ -51,9 +53,11 @@ void Animation::update(float deltaTime)
         }
         vec3 newLocation = originTrans*(1-currPercent)+translateTarget*currPercent; //mix(originTrans, translateTarget, currPercent);
         float newRot = originRot*(1-currPercent)+rotateTarget*currPercent;//mix(originRot, rotateTarget, currPercent);
-        model.setLocation(newLocation);
-        vec3 rot = model.getRotation();
+        model->setLocation(newLocation);
+        printf("%s new location:%f,%f,%f\n", model->modelPath.c_str(), newLocation.x, newLocation.y, newLocation.z);
+        vec3 rot = model->getRotation();
         rot.y = newRot;
-        model.setRotation(rot);
+        model->setRotation(rot);
+        printf("%s new rot:%f,%f,%f\n", model->modelPath.c_str(), rot.x, rot.y, rot.z);
     }
 }

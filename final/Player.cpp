@@ -86,7 +86,7 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
 
     if (movement != vec2(0, 0))
     {
-        const float moveSpeed = 30.0f;
+        const float moveSpeed = 60.0f;
         movement *= moveSpeed * deltaTime;
 
         vec3 newPosition = playerPosition;

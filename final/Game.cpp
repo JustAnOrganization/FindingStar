@@ -10,6 +10,7 @@
 #include "Model.h"
 #include "Utils.h"
 #include "Skybox.h"
+#include "Animation.h"
 
 using namespace glm;
 
@@ -42,7 +43,10 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     objects.push_back(new Model(*this, vec3(0, -120, 400), vec3(0, M_PI/2, 0), vec3(0.01, 0.01, 0.01), "models/desk.obj", "models/Wood-Textures-bmp.bmp"));
 
 	/* Desk Drawer */
-	objects.push_back(new Model(*this, vec3(0, -30, 400), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/drawer.obj", "models/Wood-Textures-bmp.bmp",false, true));
+	Model* drawer = new Model(*this, vec3(0, -30, 400), vec3(0, M_PI / 2, 0), vec3(0.01, 0.01, 0.01), "models/drawer.obj", "models/Wood-Textures-bmp.bmp");
+	objects.push_back(drawer);
+	drawer->setAnim(Animation(drawer, vec3(0, -30, 380), M_PI / 2));
+    triggers.push_back(Trigger(*drawer/*model*/, vec3(0, -30, 400)/*position*/, 0.1/*radius*/, 470/*distance*/));
 
 	/* Shelf */
     objects.push_back(new Model(*this, vec3(-400, 0, 0), vec3(0, M_PI/2, 0), vec3(0.01, 0.01, 0.01), "models/BookShelf/Shelf_Body.obj", "models/Wood-Textures-bmp.bmp"));
