@@ -45,7 +45,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	Model* drawer = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/drawer.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(drawer);
 	drawer->setAnim(Animation(drawer, vec3(0, -0.3, 3.5), 0));
-    triggers.push_back(Trigger(*drawer/*model*/, vec3(0, 0, 4)/*position*/, 0.1/*radius*/, /*470*/2/*distance*/));
+    triggers.push_back(Trigger(*drawer/*model*/, vec3(0, -0.3, 4)/*position*/, 0.1/*radius*/, /*470*/2/*distance*/));
 
 	/* Keys */
     Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
