@@ -35,7 +35,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Floor.obj", "models/Wood-Textures-bmp.bmp"));
 	objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Pic_1.obj", "models/star_map_2.bmp"));
 	objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Pic_2.obj", "models/star_map_3.bmp"));
-	objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Wall_1.obj", "models/wall_paper_3.bmp"));
+	//objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Wall_1.obj", "models/wall_paper_3.bmp"));
 	objects.push_back(new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/Room/Window.obj", "models/Wood-Textures-bmp.bmp"));
 	
 	/* Door */
@@ -47,7 +47,7 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	/* Desk Drawer */
 	Model* drawer = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/drawer.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(drawer);
-	drawer->setAnim(Animation(drawer, vec3(0, -0.3, 3.8), 0));
+	drawer->setAnim(Animation(drawer, vec3(0, -0.3, 3.5), 0));
     triggers.push_back(Trigger(*drawer/*model*/, vec3(0, -0.3, 4)/*position*/, 0.1/*radius*/, 470/*distance*/));
 
 	/* Shelf */
@@ -58,12 +58,12 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Lock.obj", "models/bronze.bmp"));
 
 	/* Shelf doors */
-	objects.push_back(new Model(*this, vec3(-4, 0, 0.05), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
-	objects.push_back(new Model(*this, vec3(-4, 0, 0.8), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
+	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
+	objects.push_back(new Model(*this, vec3(-4, 0, 0.85), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
 	/* Keys */
-    Model* key = new Model(*this, vec3(0, -0.3, 0), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
+    Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
     objects.push_back(key);
-    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 0)/*position*/, 0.1/*radius*/, 4/*distance*/));
+    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 4)/*position*/, 1/*radius*/, 4/*distance*/));
 
 	/* Photo */
 	Model* photo_f = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/Photo_Front.obj", "models/blur_astro.bmp", true);
