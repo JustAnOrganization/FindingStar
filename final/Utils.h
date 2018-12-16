@@ -7,6 +7,8 @@
 
 #include "Basic.h"
 
+const vec3 zeroVec3(0, 0, 0);
+
 #define DEBUG_ON false
 
 class UnifromVariable

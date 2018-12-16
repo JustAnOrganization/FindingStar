@@ -9,7 +9,7 @@ bool BoxCollision2D::check(vec3 position)
 {
     bool ans = true;
     if (position.x > location.x-extend.x && position.x < location.x+extend.x
-        && position.y > location.y-extend.y && position.y < location.y+extend.y)
+        && position.z > location.y-extend.y && position.z < location.y+extend.y)
         ans = false;
     if (bOut)
         ans = !ans;
