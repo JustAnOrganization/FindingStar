@@ -50,13 +50,13 @@ public:
 
     void updateMatrix()
     {
-        worldMat = glm::scale(mat4(), scale);
+        worldMat = translate(mat4(), location);
 
         worldMat = rotate(worldMat, rotation.x, vec3(1, 0, 0));
         worldMat = rotate(worldMat, rotation.y, vec3(0, 1, 0));
         worldMat = rotate(worldMat, rotation.z, vec3(0, 0, 1));
 
-        worldMat = translate(worldMat, location);
+        worldMat = glm::scale(worldMat, scale);
     }
 
     virtual void initialize(){};

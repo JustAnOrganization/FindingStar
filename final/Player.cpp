@@ -99,7 +99,7 @@ void Player::processEvent(SDL_Event& windowEvent, float deltaTime)
             playerPosition = newPosition;
         }
 
-        //cout << playerPosition.x <<", " <<playerPosition.y << ", " << playerPosition.z << endl;
+        cout << playerPosition.x <<", " <<playerPosition.y << ", " << playerPosition.z << endl;
     }
 
     //update view matrix
@@ -138,9 +138,9 @@ void Player::update(float deltaTime)
             if (model->bPickedup)
             {
                 //todo: adjust
-                vec3 newPosition = playerPosition+direction+right*0.01f+cross(right, direction)*0.01f*(float)cnt;
+                vec3 newPosition = playerPosition+direction;//+right*0.01f+cross(right, direction)*0.01f*(float)cnt;
                 model->setLocation(newPosition);
-                printf("updating picked model %s: %f, %f, %f\n", model->modelPath.c_str(), newPosition.x, newPosition.y, newPosition.z);
+                //printf("updating picked model %s: %f, %f, %f\n", model->modelPath.c_str(), newPosition.x, newPosition.y, newPosition.z);
                 cnt++;
             }
         }
