@@ -94,6 +94,9 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     collisions.push_back(BoxCollision2D(vec2(0, 0),vec2(5, 5), true));
     //desk
     //collisions.push_back(BoxCollision2D(vec2(),vec2()));
+	collisions.push_back(BoxCollision2D(vec2(0, 4),vec2(1.3,0.7)));
+	//shelf
+	collisions.push_back(BoxCollision2D(vec2(-4, 0), vec2(0.9, 0.3)));
     //todo
 }
 
