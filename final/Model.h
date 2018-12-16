@@ -49,6 +49,8 @@ public:
 
     bool bPickedup = false;
     std::string modelPath;
+
+	void setCondition(bool condition);
 private:
     GLuint shaderProgram;
     GLuint vao, vbo;
@@ -58,6 +60,7 @@ private:
 
     bool bCanPickup;
     bool bHasAnim;
+	bool bConditionMet = true;
     Animation anim;
 
     UnifromVariable WVPMat;

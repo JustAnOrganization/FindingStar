@@ -48,8 +48,13 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	Model* drawer = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/drawer.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(drawer);
 	drawer->setAnim(Animation(drawer, vec3(0, -0.3, 3.5), 0));
-    triggers.push_back(Trigger(*drawer/*model*/, vec3(0, -0.3, 4)/*position*/, 0.1/*radius*/, 470/*distance*/));
+    triggers.push_back(Trigger(*drawer/*model*/, vec3(0, 0, 4)/*position*/, 0.1/*radius*/, /*470*/2/*distance*/));
 
+	/* Keys */
+    Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
+    objects.push_back(key);
+    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 4)/*position*/, 1/*radius*/, 2/*distance*/));
+	
 	/* Shelf */
     objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Shelf_Body.obj", "models/Wood-Textures-bmp.bmp"));
 	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Stack_Top.obj", "models/orange.bmp"));
@@ -58,12 +63,17 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Lock.obj", "models/bronze.bmp"));
 
 	/* Shelf doors */
-	objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
-	objects.push_back(new Model(*this, vec3(-4, 0, 0.85), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp"));
-	/* Keys */
-    Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
-    objects.push_back(key);
-    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 4)/*position*/, 1/*radius*/, 4/*distance*/));
+	Model* door_right = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
+	objects.push_back(door_right);
+	door_right->setAnim(Animation(door_right, vec3(-3, 0, -0.55), M_PI / 2));
+	door_right->setCondition(key->bPickedup);
+	triggers.push_back(Trigger(*door_right, vec3(-4, 0, 0), 1, 6));
+	Model* door_left = new Model(*this, vec3(-4, 0, 0.85), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
+	objects.push_back(door_left);
+	door_left->setAnim(Animation(door_left, vec3(-4, 0, 0.55), -M_PI / 2));
+	door_left->setCondition(key->bPickedup);
+	triggers.push_back(Trigger(*door_left, vec3(-4, 0, 0.85), 1, 6));
+		
 
 	/* Photo */
 	Model* photo_f = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/Photo_Front.obj", "models/blur_astro.bmp", true);

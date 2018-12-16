@@ -139,7 +139,7 @@ void Model::triggered()
     {
         pickup();
     }
-    else if (bHasAnim)
+    else if (bConditionMet && bHasAnim)
     {
         anim.play();
     }
@@ -157,4 +157,8 @@ void Model::setAnim(const Animation& anim)
 {
     bHasAnim = true;
     this->anim = anim;
+}
+
+void Model::setCondition(bool condition) {
+	bConditionMet = condition;
 }
