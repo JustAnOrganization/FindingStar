@@ -122,4 +122,6 @@ void TextRenderer::renderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    glDisable(GL_BLEND);
 }

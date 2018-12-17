@@ -24,6 +24,7 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
 
     bActive = false;
     return true;
+    //todo
     playerForward = normalize(playerForward);
 
     float b = dot(2.0f * playerForward, (playerPosition - position));
@@ -31,8 +32,13 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
     float delta = b * b - 4 * c;
     if (delta > 1e-3)
     {
-        bActive = false;
-        return true;
+        double t1 = (-b + std::sqrt(delta)) / 2;
+        double t2 = (-b - std::sqrt(delta)) / 2;
+        if (t1 > 0 || t2 > 0)
+        {
+            bActive = false;
+            return true;
+        }
     }
     return false;
 }

@@ -32,10 +32,9 @@ bool fullscreen = false;
 int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	//Mix_Init(MIX_INIT_MP3);
 
 	Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
-	Mix_Music *music = Mix_LoadMUS("audio/test.mp3");
+	Mix_Music *music = Mix_LoadMUS("audio/Saturn.mp3");
 	Mix_PlayMusic(music, -1);
 
 	if (MIX_INIT_MP3 != (Mix_Init(MIX_INIT_MP3))) {
