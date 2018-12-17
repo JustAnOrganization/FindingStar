@@ -45,13 +45,17 @@ public:
     virtual void destroy() override;
     void triggered();
     void pickup();
+    bool hasPickedup()
+    {
+        return bPickedup;
+    }
     void setAnim(const Animation& anim);
+    void setText(std::vector<string>& text);
 
-    bool bPickedup = false;
     std::string modelPath;
-
-	void setCondition(bool condition);
+    bool bShow = true;
 private:
+    bool bPickedup = false;
     GLuint shaderProgram;
     GLuint vao, vbo;
     GLuint tex;
@@ -60,8 +64,9 @@ private:
 
     bool bCanPickup;
     bool bHasAnim;
-	bool bConditionMet = true;
     Animation anim;
+    bool bHasText;
+    std::vector<string> text;
 
     UnifromVariable WVPMat;
     UnifromVariable WorldMat;

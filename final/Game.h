@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "Animation.h"
+#include "TextRenderer.h"
 
 class Game;
 
@@ -92,13 +93,9 @@ public:
 
     void draw();
 
-	void RenderText(vector<string>texts);
+	void showText(const vector<string>& texts);
 
-    //todo
-    bool win()
-    {
-        return false;
-    }
+    bool win();
 
     bool checkCollision(vec3 position);
 
@@ -108,8 +105,14 @@ private:
     vector<BoxCollision2D> collisions;
     vector<Trigger> triggers;
 
+    TextRenderer textRenderer;
+    vector<string> text;
+    float textTimer;
+
     int screenWidth;
     int screenHeight;
+    Model* key;
+    Model* photo;
 };
 
 #endif //GAME_H

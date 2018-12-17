@@ -55,14 +55,10 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     triggers.push_back(Trigger(*drawer/*model*/, vec3(0, -0.3, 4)/*position*/, 0.1/*radius*/, /*470*/2/*distance*/));
 
 	/* Keys */
-    Model* key = new Model(*this, vec3(0, -0.3, 4), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
+    key = new Model(*this, vec3(0, -0.3, 3), zeroVec3, scale, "models/key.obj", "models/bronze.bmp", true);
     objects.push_back(key);
-    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 4)/*position*/, 1/*radius*/, 2/*distance*/));
-
-	/* Key_Text */
-	if (key->bPickedup) {
-		RenderText(key_texts);
-	}
+    key->setText(key_texts);
+    triggers.push_back(Trigger(*key/*model*/, vec3(0, -0.3, 3)/*position*/, 1/*radius*/, 2/*distance*/));
 	
 	/* Shelf */
     objects.push_back(new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/BookShelf/Shelf_Body.obj", "models/Wood-Textures-bmp.bmp"));
@@ -75,27 +71,23 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
 	Model* door_right = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(door_right);
 	door_right->setAnim(Animation(door_right, vec3(-3, 0, -0.55), M_PI / 2));
-	door_right->setCondition(key->bPickedup);
-	triggers.push_back(Trigger(*door_right, vec3(-4, 0, 0), 1, 6));
+	triggers.push_back(Trigger(*door_right, vec3(-4, 0, 0), 1, 6, key));
 	Model* door_left = new Model(*this, vec3(-4, 0, 0.85), zeroVec3, scale, "models/bookshelf_door.obj", "models/Wood-Textures-bmp.bmp");
 	objects.push_back(door_left);
 	door_left->setAnim(Animation(door_left, vec3(-4, 0, 0.55), -M_PI / 2));
-	door_left->setCondition(key->bPickedup);
-	triggers.push_back(Trigger(*door_left, vec3(-4, 0, 0.85), 1, 6));
-		
+	triggers.push_back(Trigger(*door_left, vec3(-4, 0, 0.85), 1, 6, key));
 
 	/* Photo */
-	Model* photo = new Model(*this, vec3(-3.9, -0, 0), vec3(M_PI/2, M_PI / 2,0), scale, "models/photo.obj", "models/photo_single.bmp", true);
+	photo = new Model(*this, vec3(-3.9, -0, 0), vec3(M_PI/2, M_PI / 2,0), scale, "models/photo.obj", "models/photo_single.bmp", true);
 	//Model* photo_b = new Model(*this, vec3(-4, 0, 0), zeroVec3, scale, "models/Photo_Back.obj", "models/photo_back.bmp", true);
-	triggers.push_back(Trigger(*photo, vec3(-3.9, -0, 0), 1, 1));
+	triggers.push_back(Trigger(*photo, vec3(-3.9, -0, 0), 1, 1, key));
 	objects.push_back(photo);
 
 	/* Door */
 	Model* room_door = new Model(*this, vec3(0, -2, 0), zeroVec3, scale, "models/room_door.obj", "models/Wood-Textures-bmp.bmp");
 	//Model* room_door = new Model(*this, vec3(-0.8, -2, -7.2), vec3(0,M_PI/2,0), scale, "models/room_door.obj", "models/Wood-Textures-bmp.bmp");
 	room_door->setAnim(Animation(room_door, vec3(-0.8, -2, -7.2), M_PI / 2));
-	triggers.push_back(Trigger(*room_door, vec3(0, -2, 0), 1, 10));
-	//room_door->setCondition(photo->bPickedup);
+	triggers.push_back(Trigger(*room_door, vec3(0, -2, 0), 1, 10, photo));
 	objects.push_back(room_door);
 
     //skybox
@@ -105,7 +97,6 @@ Game::Game(int width, int height) : player(*this, M_PI/4, width / (float) height
     //room
     collisions.push_back(BoxCollision2D(vec2(0, 0),vec2(5, 5), true));
     //desk
-    //collisions.push_back(BoxCollision2D(vec2(),vec2()));
 	collisions.push_back(BoxCollision2D(vec2(0, 4),vec2(1.3,0.7)));
 	//shelf
 	collisions.push_back(BoxCollision2D(vec2(-4, 0), vec2(0.9, 0.3)));
@@ -130,6 +121,8 @@ void Game::initialize()
         object->initialize();
     }
 
+    textRenderer.init();
+
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -140,6 +133,17 @@ void Game::update(float deltaTime)
     for (auto* object: objects)
     {
         object->update(deltaTime);
+    }
+
+
+    if (textTimer > 0)
+    {
+        //printf("texttimer:%f", textTimer);
+        textTimer -= deltaTime;
+        for (int i = 0; i < text.size(); ++i)
+        {
+            textRenderer.renderText(text[i], screenWidth / 2.0f - 220, screenHeight / 2.f - i * 50, 0.5, glm::vec3(1, 1, 1));
+        }
     }
 }
 
@@ -161,6 +165,13 @@ bool Game::checkCollision(vec3 position)
     return true;
 }
 
-void Game::RenderText(vector<string> texts) {
+void Game::showText(const vector<string>& texts)
+{
+    text = texts;
+    textTimer = 10;
+}
 
+bool Game::win()
+{
+    return photo->hasPickedup();
 }

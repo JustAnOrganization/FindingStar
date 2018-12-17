@@ -135,7 +135,7 @@ void Player::update(float deltaTime)
         Model* model;
         if ((model = dynamic_cast<Model*>(object)) != nullptr)
         {
-            if (model->bPickedup)
+            if (model->hasPickedup())
             {
                 //todo: adjust
                 vec3 newPosition = playerPosition+direction;//+right*0.01f+cross(right, direction)*0.01f*(float)cnt;

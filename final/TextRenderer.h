@@ -19,7 +19,7 @@ class TextRenderer
 public:
     void init();
 
-    void renderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, vec3 color);
+    void renderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, vec3 color=vec3(1,1,1));
 
 private:
     GLuint shaderProgram;

@@ -8,6 +8,13 @@
 bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
 {
     if (!bActive) return false;
+    if (prereqModel)
+    {
+        if (!prereqModel->hasPickedup())
+        {
+            return false;
+        }
+    }
 
     printf("%s dist:%f\n", model.modelPath.c_str(), glm::distance(playerPosition, position));
 
@@ -29,8 +36,8 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
     return false;
 }
 
-Trigger::Trigger(Model &model, vec3 position, float radius, float distance)
-        : model(model), position(position), radius(radius), distance(distance), bActive(true) {}
+Trigger::Trigger(Model &model, vec3 position, float radius, float distance, Model* prereqModel)
+        : model(model), position(position), radius(radius), distance(distance), bActive(true), prereqModel(prereqModel) {}
 
 void Animation::play()
 {

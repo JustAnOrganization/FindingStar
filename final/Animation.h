@@ -12,12 +12,15 @@ class Model;
 //sphere trigger
 struct Trigger
 {
-    Trigger(Model& model, vec3 position, float radius, float distance = 0.5);
+    //typedef std::function<bool()> Condition;
+
+    Trigger(Model& model, vec3 position, float radius, float distance = 0.5, Model* prereqModel = nullptr);
     bool trigger(vec3 playerPosition, vec3 playerForward);
     Model& model;
     vec3 position;
     float radius, distance;
     bool bActive;
+    Model* prereqModel;
 };
 
 struct Animation

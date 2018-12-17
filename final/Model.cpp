@@ -109,6 +109,9 @@ void Model::draw()
 {
     RenderObject::draw();
 
+    if (!bShow)
+        return;
+
     glUseProgram(shaderProgram);
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -139,18 +142,30 @@ void Model::triggered()
     {
         pickup();
     }
-    else if (bConditionMet && bHasAnim)
+    if (bHasAnim)
     {
         anim.play();
+    }
+    if (bHasText)
+    {
+        game.showText(text);
     }
 }
 
 Model::Model(Game &game, vec3 location, vec3 rotation, vec3 scale, string modelPath, string texPath, bool bCanPickup)
-        : anim(this), RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup), bHasAnim(false) { }
+        : anim(this), RenderObject(game, location, rotation, scale), modelPath(modelPath), texPath(texPath), bCanPickup(bCanPickup)
+        , bHasAnim(false), bHasText(false) { }
 
 void Model::pickup()
 {
     bPickedup = true;
+    static Model* currModel = nullptr;
+    //curr pick up model disappear
+    if (currModel)
+    {
+        currModel->bShow = false;
+    }
+    currModel = this;
 }
 
 void Model::setAnim(const Animation& anim)
@@ -159,6 +174,8 @@ void Model::setAnim(const Animation& anim)
     this->anim = anim;
 }
 
-void Model::setCondition(bool condition) {
-	bConditionMet = condition;
+void Model::setText(std::vector<string> &text)
+{
+    bHasText = true;
+    this->text = text;
 }
