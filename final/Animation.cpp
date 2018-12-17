@@ -22,6 +22,7 @@ bool Trigger::trigger(vec3 playerPosition, vec3 playerForward)
     if (glm::distance(playerPosition, position) > distance)
         return false;
 
+    bActive = false;
     return true;
     playerForward = normalize(playerForward);
 
